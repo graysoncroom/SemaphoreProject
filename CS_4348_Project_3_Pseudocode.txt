@@ -1,0 +1,41 @@
+// Ashton Smith ajs190019 and Grayson Croom wgc180002
+// Implementing a barrier using semaphores for Project 3
+
+class SemaphoreBarrier
+private:
+	// private vars for barrier usage
+	int count = 0
+	int numThreads
+	semaphore barrier = 0
+	semaphore mutex = 1
+	
+public:
+
+	// constructor
+	Barrier(int numThreads):
+		this.numThreads = numThreads
+	
+	// method for each thread to stop for the barrier
+	void arriveAndWait()
+	
+		// waiting for mutex to be free and incrementing ctr
+		wait(mutex)
+		count++
+		
+		// when all threads have incremented count we free them
+		if count == numThreads
+			
+			for 0 to numThreads - 1
+				post(barrier)
+			
+			// reset count
+			count = 0
+
+ 			// give another thread the mutex
+ 			post(mutex)
+        else
+			// give another thread the mutex
+			post(mutex)
+		
+			// wait for all threads to finish
+			wait(barrier)
