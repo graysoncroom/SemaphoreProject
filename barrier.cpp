@@ -1,14 +1,13 @@
 #include "barrier.h"
-#include <iostream>
 
 namespace synchronization
 {
 
   barrier::barrier(int numberOfThreads) : count(0), numThreads(numberOfThreads) { 
-    std::cout << "Entering barrier::barrier constructor" << std::endl;
+    //std::cout << "Entering barrier::barrier constructor" << std::endl;
     sem_init(&this->posix_barrier, 0, 0);
     sem_init(&this->posix_mutex, 0, 1);
-    std::cout << "Leaving barrier::barrier constructor" << std::endl;
+    //std::cout << "Leaving barrier::barrier constructor" << std::endl;
   }
 
   barrier::~barrier( ) {
@@ -20,7 +19,7 @@ namespace synchronization
     sem_wait(&this->posix_mutex);
     this->count++;
 
-    std::cout << "In barrier" << std::endl;
+    //std::cout << "In barrier" << std::endl;
 
     if (this->count == this->numThreads) {
       for (int i = 0; i < numThreads; i++) {

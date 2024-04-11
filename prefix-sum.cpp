@@ -41,7 +41,7 @@ void doWork( int myid ) {
 
   for(int i = 0; i < numberOfPhases; ++i)
   {
-    std::cout << "Thread with ID = " << myid << " is starting phase #" << i << std::endl;
+    //std::cout << "Thread with ID = " << myid << " is starting phase #" << i << std::endl;
     // execute phase i
     for(int j = mystart; j < myfinish; ++j )
     {
@@ -58,17 +58,17 @@ void doWork( int myid ) {
       }
 
     }
-    std::cout << "Thread with ID = " << myid << " has finished phase #" << i << std::endl;
+    //std::cout << "Thread with ID = " << myid << " has finished phase #" << i << std::endl;
 
     // double the value of fixed
     fixed = 2*fixed;
 
     // Wait until all threads have completed their work before moving to the next phase
-    std::cout << "Calling rendevousz->arriveAndWait();" << std::endl;
+    //std::cout << "Calling rendevousz->arriveAndWait();" << std::endl;
     rendevousz->arriveAndWait( );
   }
   
-  std::cout << "Returning from do_work()" << std::endl;
+  //std::cout << "Returning from do_work()" << std::endl;
   return;
 }
 
@@ -119,9 +119,9 @@ int main( int argc, char** argv )
 
   // Create a barrier object to be used by worker threads to synchronize movement from one phase to the next
   //     a thread can advance to phase i+1 only after ALL threads have completed phase i
-  std::cout << "Creating barrier rendevousz" << std::endl;
+  //std::cout << "Creating barrier rendevousz" << std::endl;
   rendevousz = new synchronization::barrier( numberOfThreads );
-  std::cout << "Finished creating barrier rendevousz" << std::endl;
+  //std::cout << "Finished creating barrier rendevousz" << std::endl;
 
   // Create worker threads
   //    first parameter is the name of the function each thread has to execute
@@ -130,7 +130,7 @@ int main( int argc, char** argv )
   workers = new std::thread[numberOfThreads];
 
   for(int i = 0; i < numberOfThreads; ++i) {
-    std::cout << "Starting work on thread #" << i << std::endl;
+    //std::cout << "Starting work on thread #" << i << std::endl;
     workers[i] = std::thread( doWork, i );
   }
 
@@ -140,7 +140,7 @@ int main( int argc, char** argv )
   //    If the main thread terminates before the child threads, it will force termination all the child threads
   for(int i = 0; i < numberOfThreads; ++i) {
     // we never get here
-    std::cout << "Joining thread #" << i << std::endl;
+    //std::cout << "Joining thread #" << i << std::endl;
     workers[i].join();
   }
 
