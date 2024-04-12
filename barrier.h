@@ -11,8 +11,9 @@ namespace synchronization
     private:
       int count;
       int numThreads;
-      sem_t posix_barrier;
-      sem_t posix_mutex;
+      sem_t mutex;
+      sem_t entry_barrier;
+      sem_t exit_barrier;
 
     public:
 

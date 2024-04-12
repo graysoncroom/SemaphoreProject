@@ -19,4 +19,4 @@ all: prefix-sum
 
 # Clean the directory
 clean: 
-	rm -f $(EXECUTABLES)  *.o
+	rm -f $(EXECUTABLES)  *.o *.gch
