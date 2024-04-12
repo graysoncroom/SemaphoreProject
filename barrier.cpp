@@ -22,13 +22,16 @@ namespace synchronization
     //std::cout << "In barrier" << std::endl;
 
     if (this->count == this->numThreads) {
+      // reset count before lifting barrier for everyone
+      this->count = 0;
+
       for (int i = 0; i < numThreads; i++) {
         // lift the barrier for all threads
         sem_post(&this->posix_barrier);
       }
 
       // reset count after lifting barrier for everyone
-      this->count = 0;
+      //this->count = 0;
 
       // release the mutex semaphore
       sem_post(&this->posix_mutex); 
@@ -45,5 +48,4 @@ namespace synchronization
     // wait at the barrier semaphore
     sem_wait(&this->posix_barrier);
   }
-
 }
